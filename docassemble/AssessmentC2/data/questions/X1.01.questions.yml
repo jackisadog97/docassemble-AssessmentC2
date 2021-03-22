@@ -28,10 +28,25 @@ fields:
   - no label: MJFwork_requested
     datatype: area
 ---
+# Stores the description of the work that was completed
+question: Describe the work you have completed
+fields:
+  - no label: MJFwork_done
+    datatype: area
+---
 # We ask the two payment questions in a single question block
 question: Payment
 fields:
   - How much did you agree to pay for this work?: MJFpayment_agreed
+    datatype: currency
+    min: 0
+under: |
+  If you have not yet paid anything, just leave the default value of $0.00
+---
+# We ask the two payment questions in a single question block
+question: Payment
+fields:
+  - How much did you agree to complete the works for?: agreed_price
     datatype: currency
     min: 0
 under: |
@@ -48,18 +63,40 @@ fields:
       - Yes. The other person agreed to do some of this work but there was other work that was not agreed to that wasn't done: MJFagree_inexact
       - No. The other person did not agree to do this work or all of this work: MJFdisagree
 ---
+question: Did the other person agree to pay you for this work?
+fields:
+  - no label: work_agreements
+    datatype: radio
+    choices:
+      - Yes. The other person agreed to pay for this exact work: LMexact
+      - Yes. The other person agreed to  pay for some of the work but there were other works that were agreed to and weren't paid for: LMinexact
+      - No. The other person did not agree to pay for this work: LMdisagree
+---
 # Test for Consideration (and Certainty)
 # Because this is a Yes/No answer we store the results as boolean (ie: True/False)
 # values.  For more information on booleans check out C2.01 video.
 question: Payment for the Work
 subquestion: |
-  Did you and the other person agree how much you would pay for the work?
+  Did you and the other person agree on how much you would pay for the work?
 fields:
   - no label: MJFconsideration
     datatype: radio
     choices:
       - Yes, we agreed to pay ${ currency(MJFpayment_agreed) } for the work: True
       - No, we never reached a firm agreement on how much I should pay: False
+---
+# Test for Consideration (and Certainty)
+# Because this is a Yes/No answer we store the results as boolean (ie: True/False)
+# values.  For more information on booleans check out C2.01 video.
+question: Payment for the Work
+subquestion: |
+  Did you and the other person agree how much you would get paid for the work?
+fields:
+  - no label: LMconsideration
+    datatype: radio
+    choices:
+      - Yes, we agreed to pay ${ currency(agreed_price) } for the work: True
+      - No, we never reached a firm agreement on how much I should be paid: False
 ---
 # Just to mix things up, we use a 'yesno' field to ask whether the other person
 # had capacity.  We are reducing 'capacity' in this app to just being an adult.

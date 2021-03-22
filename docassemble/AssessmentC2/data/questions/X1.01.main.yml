@@ -63,9 +63,20 @@ code: |
   # We need to split off here depending on what the user
   # answered
   if MJFsue_reason == 'MJFpromisor':
-    # Students will need to put logic in here
-    # for the promisor part of the code
-    pass
+    MJFwork_done
+    agreed_price
+    
+    #offer / acceptance
+    if work_agreements == 'LMexact' and LMconsideration == True and MJFcapacity == True:
+      MJFcontract_exists = True
+    else:
+      MJFcontract_exists = False   
+    endpoints['final_screen']
+    
+    
+    
+    
+    
   elif MJFsue_reason == 'MJFpromisee':
     # This is right side of the flowchart.  Off we go!
 
