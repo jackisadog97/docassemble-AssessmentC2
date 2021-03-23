@@ -1,0 +1,91 @@
+---
+continue button field: target_variable
+question: |
+  Court Form 1 Completer.
+subquestion: |
+  This application will assist you in creating Court Form 1
+  
+  Please press continue when ready...
+buttons: 
+  - Exit: exit
+    url: http://www.courts.sa.gov.au/Pages/default.aspx
+  - Restart: restart
+  - Continue: continue
+mandatory: True
+---
+question: Courts Selection
+subquestion: |
+  Please select court you require a form for
+field: court_choice
+choices:
+  - Supreme Court
+  - District Court
+  - Magistrates Court
+  - Federal Court
+  - Federal Circuit Court
+mandatory: True
+---
+code: |
+  if court_choice != "Federal Court" and court_choice != "Federal Circuit Court":
+    message("Wrong court choice.", "This application works only with Federal, and Federal Circuit Courts", url ="http://www.courts.sa.gov.au/Pages/default.aspx")
+mandatory: True
+---
+mandatory: True
+question: Form Generator
+subquestion: Answer the following fields.
+fields:
+  - Party 1: party1
+  - Party 2: party2
+  - State: state
+  - Division: division
+    input type: radio
+    choices:
+      - Corporation
+      - Criminal 
+      - Employment
+      - General
+  - Full Name of Applicant: applicant_name
+  - Full Name of Respondent: respondent_name
+  - Date: date
+    datatype: date
+  - Author: author_name
+---
+mandatory: True
+question: |
+  Form Fields
+subquestion: |
+  Please check ensure that your details are correct
+  
+  Fields  | Details
+  -------|---------
+  Party 1  | ${party1}
+  Party 2 | ${party2}
+  State   | ${state}
+  Division   | ${division}
+  Applicant Name   | ${applicant_name}
+  Respondent Name   | ${respondent_name}
+  Date    | ${date}
+  Author    | ${author_name}
+buttons: 
+  - Exit: exit
+    url: http://www.courts.sa.gov.au/Pages/default.aspx
+  - Restart: restart
+  - Continue: continue
+---
+
+mandatory: True
+question: |
+  Your generated report
+subquestion: |
+  Download or email a copy of your personal form
+attachment:
+  name: ${author_name} 's Report
+  filename: report
+  docx template file: breach_of_contract_template.docx
+  valid formats:
+    - pdf
+buttons: 
+  - Exit: exit
+    url: http://www.courts.sa.gov.au/Pages/default.aspx
+  - Restart: restart
+  - Continue: continue

@@ -1,1 +1,1 @@
-This is the app for assessment 2, the breach of contract application.
+Generates a pdf from docx template. 

@@ -44,8 +44,8 @@ def find_package_data(where='.', package='', exclude=standard_exclude, exclude_d
 
 setup(name='docassemble.AssessmentC2',
       version='0.0.1',
-      description=('Breach Of Contract App'),
-      long_description='This is the app for assessment 2, the breach of contract application.',
+      description=('The first assessment piece'),
+      long_description='Generates a pdf from docx template. ',
       long_description_content_type='text/markdown',
       author='Louis Macconnell',
       author_email='macc0016@flinders.edu.au',
